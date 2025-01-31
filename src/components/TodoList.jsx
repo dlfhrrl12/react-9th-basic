@@ -1,7 +1,9 @@
+import { useState } from "react";
+import { CreateSubmit } from "./CreateSubmit";
 import { StBox } from "./style/styled";
 
 
-const todos = [
+const SAMPLE_TODOS = [
    { id: 1, text: "Buy milk" },
    { id: 2, text: "Clean the house" },
    { id: 3, text: "Go for a run" },
@@ -15,8 +17,12 @@ const todos = [
  ];
 
 export const TodoList = () => {
+  
+  const [todos, setTodos] = useState(SAMPLE_TODOS);
+  
     return (
       <StBox>
+        <CreateSubmit todos={todos} setTodos={setTodos}/>
        <ul>
           {todos.map((todo) => (
             <li key={todo.id}>{todo.text}</li>
