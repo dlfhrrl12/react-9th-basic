@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CreateSubmit } from "./CreateSubmit";
-import { StBox } from "./style/styled";
+import { CompletedText, StBox, TodoButton } from "./style/styled";
 
 
 const SAMPLE_TODOS = [
@@ -20,14 +20,32 @@ export const TodoList = () => {
   
   const [todos, setTodos] = useState(SAMPLE_TODOS);
   
+  const handleUpdate = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if(todo.id === id) { return {...todo, completed: !todo.completed } }
+      return todo;
+    });
+    setTodos(updatedTodos);
+    }
+  
+
+
+
     return (
       <StBox>
         <CreateSubmit todos={todos} setTodos={setTodos}/>
-       <ul>
-          {todos.map((todo) => (
-            <li key={todo.id}>{todo.text}</li>
-          ))}
-       </ul>
+        <ul>
+      {todos.map(({ id, text, completed }) => (
+        <li key={id}>
+          <CompletedText completed={completed}>{text}</CompletedText> {/* 스타일 적용 */}
+          <div>
+            <TodoButton completed={completed} onClick={() => handleUpdate(id)}>
+              {completed ? '취소하기' : '완료하기'}
+            </TodoButton> {/* 스타일 적용 */}
+          </div>
+        </li>
+      ))}
+    </ul>
       </StBox>
     );
 }

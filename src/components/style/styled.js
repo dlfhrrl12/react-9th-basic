@@ -7,3 +7,16 @@ export const StBox = styled.div`
   align-items: center; // 가로 가운데 정렬
   height: 100vh; // 100vh는 화면 전체 높이의 100%를 의미
 `
+
+export const CompletedText = styled.p`
+   text-decoration: ${(props) => (props.completed ? "line-through" : "none")};
+`
+
+export const TodoButton = styled.button`
+  background-color: ${(props) => (props.completed ? 'red' : 'green')};
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+`
