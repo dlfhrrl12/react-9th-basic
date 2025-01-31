@@ -1,19 +1,12 @@
 import { useState } from "react";
 import { CreateSubmit } from "./CreateSubmit";
-import { CompletedText, StBox, TodoButton } from "./style/styled";
+import { CompletedText, DeleteButton, StBox, TodoButton } from "./style/styled";
 
 
 const SAMPLE_TODOS = [
-   { id: 1, text: "Buy milk" },
-   { id: 2, text: "Clean the house" },
-   { id: 3, text: "Go for a run" },
-   { id: 4, text: "Finish homework" },
-   { id: 5, text: "Call mom" },
-   { id: 6, text: "Buy groceries" },
-   { id: 7, text: "Walk the dog" },
-   { id: 8, text: "Read a book" },
-   { id: 9, text: "Do laundry" },
-   { id: 10, text: "Write code" },
+  { id: 1, text: "Learn React" },
+  { id: 2, text: "Build a Todo App" },
+  { id: 3, text: "Deploy to Production" },
  ];
 
 export const TodoList = () => {
@@ -27,8 +20,22 @@ export const TodoList = () => {
     });
     setTodos(updatedTodos);
     }
-  
-
+  /**------------- delete -----------
+   * const handleDelete = (id) => {
+   *    const filteredTodos = todos.filter((todo) => {
+   *      if(todo.id === id){
+   *      return false;  
+   *    }
+   *    return true;
+   *  });
+   *  setTodos(filteredTodos);
+   * }
+   * 
+   * 
+   */
+    const handleDelete = (id) => {
+      setTodos((prev) => prev.filter((todo) => todo.id !== id));
+    }
 
 
     return (
@@ -37,11 +44,14 @@ export const TodoList = () => {
         <ul>
       {todos.map(({ id, text, completed }) => (
         <li key={id}>
-          <CompletedText completed={completed}>{text}</CompletedText> {/* 스타일 적용 */}
+          <CompletedText completed={completed}>{text}</CompletedText> 
           <div>
             <TodoButton completed={completed} onClick={() => handleUpdate(id)}>
               {completed ? '취소하기' : '완료하기'}
-            </TodoButton> {/* 스타일 적용 */}
+            </TodoButton>
+            <DeleteButton onClick={() => handleDelete(id)}>
+              삭제하기
+            </DeleteButton>
           </div>
         </li>
       ))}

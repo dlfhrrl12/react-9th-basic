@@ -20,3 +20,12 @@ export const TodoButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `
+
+export const DeleteButton = styled.button`
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+`
